@@ -33,13 +33,16 @@ def validateJSONFile(jsonFile):
 
 
 def fetchContent(templateFile):
-    with open(templateFile) as f:
-        check = validateJSONFile(f)
-        if check is None:
-            f.seek(0)
-            return f.read().splitlines()
-        else:
-            printError('JSON template error: ' + str(check))
+    try:
+        with open(templateFile) as f:
+            check = validateJSONFile(f)
+            if check is None:
+                f.seek(0)
+                return f.read().splitlines()
+            else:
+                printError('JSON template error: ' + str(check))
+    except FileNotFoundError as err:
+        printError(err)
 
 
 def generateJSONdata(templateContent):
