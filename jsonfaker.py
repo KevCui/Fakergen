@@ -1,38 +1,80 @@
 #!/usr/bin/python3
-# ~$ ./jsonfaker.py <json_template>
-
+# -*- coding: utf-8 -*-
 import sys
 import re
-from faker import Faker
-from faker.providers import BaseProvider
+import json
+import argparse
 
 
-class customProvider(BaseProvider):
-    sentences = (
-        'Hello world',
-        'Hi there',
-        'Ciao Bello',
-    )
-
-    def greeting(self):
-        return self.random_element(self.sentences)
+def printWarning(message):
+    print('\033[93m[WARNING]\033[0m ' + str(message))
 
 
-fake = Faker()
-fake.add_provider(customProvider)
-jsontemplate = sys.argv[1]
-pattern = r'\{\{\w+\([\w=,\s?#\'\":-]*\)\}\}'
+def printError(message):
+    print('\033[91m[ERROR]\033[0m ' + str(message))
+    sys.exit(1)
 
-with open(jsontemplate) as f:
-    content = f.read().splitlines()
 
-for line in content:
-    num = len(re.findall(pattern, line))
-    if num != 0:
-        newline = line
-        for i in range(1, num+1):
-            item = re.findall(pattern, newline)
-            newline = newline.replace(item[0], str(eval('fake.' + re.sub(r'[\{\}]', '', item[0]))), 1)
-        print(newline)
-    else:
-        print(line)
+def parseArgs():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('template', nargs=1, help='json template file')
+    if len(sys.argv) == 1:
+        parser.print_help()
+        printError('Missing json template file as input!')
+    return parser.parse_args()
+
+
+def validateJSONFile(jsonFile):
+    try:
+        json.load(jsonFile)
+    except ValueError as err:
+        return err
+    return None
+
+
+def fetchContent(templateFile):
+    with open(templateFile) as f:
+        check = validateJSONFile(f)
+        if check is None:
+            f.seek(0)
+            return f.read().splitlines()
+        else:
+            printError('JSON template error: ' + str(check))
+
+
+def generateJSONdata(templateContent):
+    from faker import Faker
+    fake = Faker()
+
+    try:
+        from customprovider import CustomProvider
+        fake.add_provider(CustomProvider)
+    except (ModuleNotFoundError, ImportError):
+        pass
+
+    pattern = r'\{\{\w+\([\w=,\s?#\'\":-]*\)\}\}'
+
+    for line in templateContent:
+        num = len(re.findall(pattern, line))
+        if num != 0:
+            newline = line
+            for i in range(1, num+1):
+                item = re.findall(pattern, newline)
+                try:
+                    newline = newline.replace(item[0], str(eval('fake.' + re.sub(r'[\{\}]', '', item[0]))), 1)
+                except AttributeError as err:
+                    printError(err)
+            print(newline)
+        else:
+            print(line)
+
+
+def main():
+    args = parseArgs()
+    template = str(args.template[0])
+    content = fetchContent(template)
+    generateJSONdata(content)
+
+
+if __name__ == '__main__':
+    main()
