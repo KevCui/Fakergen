@@ -4,10 +4,10 @@
     "hostname": "{{hostname(2)}}",
     "attributes": [
       {
+        "text": "static text",
         "ean": "{{ean13(leading_zero=False)}}",
         "random_number": "{{pyint(min_value=1, max_value=999, step=1)}}",
-        "color": "{{color_name()}} {{color_name()}}",
-        "text": "static text",
+        "colors": "{{color_name()}} {{color_name()}}",
         "custom_greeting": "{{greeting()}}"
       }
     ]
