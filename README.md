@@ -1,6 +1,6 @@
 # jsonFaker
 
-> Generate mock json data with a structured template using Faker under the hood.
+> Generate mock JSON data with a structured template using Faker under the hood.
 
 ## Table of Contents
 
@@ -35,6 +35,8 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 ```
+
+- Generate JSON data using default `./template.json`:
 
 ```bash
 ~$ cat ./template.json
@@ -74,7 +76,7 @@ optional arguments:
 
 ### How to create a JSON template?
 
-JSON template is basically a JSON file with variables inside. As an example, `./template.json` shows briefly how a template looks like: Using `{{...}}` to surround Faker provider name or custom function name will indicates the function to be executed as a Faker provider or a python function.
+JSON template is basically a JSON file with variables inside. As an example, `./template.json` shows briefly how a template looks like: Using `{{...}}` to surround Faker provider name or custom function name will indicate the function to be executed as a Faker provider or a python function.
 
 A list of Faker providers can be found [here](https://faker.readthedocs.io/en/stable/providers.html).
 
@@ -86,13 +88,13 @@ Checkout `greeting()` function as an example.
 
 ### How to repeat certain elements?
 
-- One solution is to generate a new template with repeated elements. Using [jq](https://stedolan.github.io/jq/download/) can simply do the job. For exmaple, to repeat `attributes`:
+- One solution is to generate a new template with repeated elements. Using [jq](https://stedolan.github.io/jq/download/) can simply do the job. For exmaple, repeat `attributes`:
 
 ```bash
 jq '.[].attributes += $el' --argjson el "$(jq '.[].attributes' template.json)" template.json > newtemplate.json
 ```
 
-If more repeats are needed, `for` loop is helpful:
+If more repeats are needed, `for` loop is helpful. For example, repeat `attributes` 5 times:
 
 ```bash
 j="$(cat template.json)"; for ((i=0;i<5;i++)); do j="$(jq '.[].attributes += $el' --argjson el "$(jq '.[].attributes' template.json)" <<< "$j")"; done; echo "$j" > newtemplate.json
