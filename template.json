@@ -1,0 +1,15 @@
+[
+  {
+    "product_number": "{{bothify(text='????-########', letters='ABCDE')}}",
+    "hostname": "{{hostname(2)}}",
+    "attributes": [
+      {
+        "ean": "{{ean13(leading_zero=False)}}",
+        "random_number": "{{pyint(min_value=1, max_value=999, step=1)}}",
+        "color": "{{color_name()}} {{color_name()}}",
+        "text": "static text",
+        "custom_greeting": "{{greeting()}}"
+      }
+    ]
+  }
+]
