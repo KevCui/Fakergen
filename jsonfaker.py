@@ -20,7 +20,7 @@ def parseArgs():
     parser.add_argument('template', nargs=1, help='json template file')
     if len(sys.argv) == 1:
         parser.print_help()
-        printError('Missing json template file as input!')
+        printError('Missing JSON template file as input!')
     return parser.parse_args()
 
 
