@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product>
+    <number>{{bothify(text='????-########', letters='ABCDE')}}</number>
+    <hostname>{{hostname(2)}}</hostname>
+    <attributes>
+        <text>static text</text>
+        <ean>{{ean13(leading_zero=False)}}</ean>
+        <randomNumber>{{pyint(min_value=1, max_value=999, step=1)}}</randomNumber>
+        <colors>{{color_name()}} {{color_name()}}</colors>
+        <greeting>{{greeting()}}</greeting>
+    </attributes>
+</product>
