@@ -4,22 +4,19 @@ import sys
 import re
 import argparse
 
-
-def printWarning(message):
-    print('\033[93m[WARNING]\033[0m ' + str(message))
+_silent = False
 
 
 def printError(message):
-    print('\033[91m[ERROR]\033[0m ' + str(message))
-    sys.exit(1)
+    if not _silent:
+        print('\033[91m[ERROR]\033[0m ' + str(message))
+        sys.exit(1)
 
 
 def parseArgs():
     parser = argparse.ArgumentParser()
     parser.add_argument('template', nargs=1, help='Faker template file')
-    if len(sys.argv) == 1:
-        parser.print_help()
-        printError('Missing Faker template file as input!')
+    parser.add_argument('--silent', '-s', action='store_true', help='Don\'t show error message')
     return parser.parse_args()
 
 
@@ -60,6 +57,10 @@ def generateData(templateContent):
 
 def main():
     args = parseArgs()
+
+    global _silent
+    _silent = args.silent
+
     template = str(args.template[0])
     content = fetchContent(template)
     generateData(content)
