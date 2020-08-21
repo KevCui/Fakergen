@@ -28,13 +28,14 @@
 ## Usage
 
 ```
-usage: fakergen.py [-h] template
+usage: fakergen.py [-h] [--silent] template
 
 positional arguments:
-  template    Faker template file
+  template      Faker template file
 
 optional arguments:
-  -h, --help  show this help message and exit
+  -h, --help    show this help message and exit
+  --silent, -s  Don't show error message
 ```
 
 - Generate JSON data using default `./template.json`:
