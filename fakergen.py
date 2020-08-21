@@ -16,7 +16,7 @@ def printError(message):
 def parseArgs():
     parser = argparse.ArgumentParser()
     parser.add_argument('template', nargs=1, help='Faker template file')
-    parser.add_argument('--silent', '-s', action='store_true', help='Don\'t show error message')
+    parser.add_argument('-s', '--silent', action='store_true', help='Don\'t show error message')
     return parser.parse_args()
 
 
