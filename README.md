@@ -48,7 +48,7 @@ optional arguments:
       {
         "text": "static text",
         "ean": "{{ean13(leading_zero=False)}}",
-        "random_number": "{{pyint(min_value=1, max_value=999, step=1)}}",
+        "random_number": {{pyint(min_value=1, max_value=999, step=1)}},
         "colors": "{{color_name()}} {{color_name()}}",
         "custom_greeting": "{{greeting()}}"
       }
@@ -65,7 +65,7 @@ optional arguments:
       {
         "text": "static text",
         "ean": "7263776026664",
-        "random_number": "65",
+        "random_number": 65,
         "colors": "OldLace Tomato",
         "custom_greeting": "Hi there"
       }

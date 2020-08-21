@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import sys
 import re
-import json
 import argparse
 
 
@@ -24,23 +23,10 @@ def parseArgs():
     return parser.parse_args()
 
 
-def validateJSONFile(jsonFile):
-    try:
-        json.load(jsonFile)
-    except ValueError as err:
-        return err
-    return None
-
-
 def fetchContent(templateFile):
     try:
         with open(templateFile) as f:
-            check = validateJSONFile(f)
-            if check is None:
-                f.seek(0)
-                return f.read().splitlines()
-            else:
-                printError('JSON template error: ' + str(check))
+            return f.read().splitlines()
     except FileNotFoundError as err:
         printError(err)
 
