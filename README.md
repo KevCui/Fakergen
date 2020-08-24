@@ -18,6 +18,7 @@
 - Fully support Faker providers
 - Customizable extended functions
 - Support any file formats: JSON, YAML, XML...
+- CLI script, easy to be integrated into any CI process
 
 ## Dependency
 
