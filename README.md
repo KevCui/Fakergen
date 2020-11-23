@@ -108,3 +108,7 @@ To generate YAML/XML template, similar to `jq`, [yq](https://github.com/kislyuk/
 ## Credits
 
 Inspired by [JSON Generator](https://www.json-generator.com/)
+
+---
+
+<a href="https://www.buymeacoffee.com/kevcui" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-orange.png" alt="Buy Me A Coffee" height="60px" width="217px"></a>
