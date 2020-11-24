@@ -15,7 +15,7 @@ def parseArgs():
     parser = argparse.ArgumentParser()
     parser.add_argument('template', help='template file')
     parser.add_argument('-q', '--quiet', action='store_true', help='be quiet, no error message')
-    parser.add_argument('-s', '--seed', help='set seed value')
+    parser.add_argument('-s', '--seed', type=int, help='set seed value')
     return parser.parse_args()
 
 
