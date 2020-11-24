@@ -33,12 +33,12 @@
 usage: fakergen.py [-h] [-q] [-s SEED] template
 
 positional arguments:
-  template              Faker template file
+  template              template file
 
 optional arguments:
   -h, --help            show this help message and exit
-  -q, --quiet           Be quiet, no error message
-  -s SEED, --seed SEED  Seed value
+  -q, --quiet           be quiet, no error message
+  -s SEED, --seed SEED  set seed value
 ```
 
 - Generate JSON data using default `./template.json`:
