@@ -4,19 +4,18 @@ import sys
 import re
 import argparse
 
-_silent = False
-
 
 def printError(message):
-    if not _silent:
+    if not _quiet:
         print('\033[91m[ERROR]\033[0m ' + str(message))
         sys.exit(1)
 
 
 def parseArgs():
     parser = argparse.ArgumentParser()
-    parser.add_argument('template', nargs=1, help='Faker template file')
-    parser.add_argument('-s', '--silent', action='store_true', help='Don\'t show error message')
+    parser.add_argument('template', help='Faker template file')
+    parser.add_argument('-q', '--quiet', action='store_true', help='Be quiet, no error message')
+    parser.add_argument('-s', '--seed', help='Seed value')
     return parser.parse_args()
 
 
@@ -31,6 +30,8 @@ def fetchContent(templateFile):
 def generateData(templateContent):
     from faker import Faker
     fake = Faker()
+    if _seed:
+        fake.seed_instance(_seed)
 
     try:
         from customprovider import CustomProvider
@@ -58,13 +59,16 @@ def generateData(templateContent):
 def main():
     args = parseArgs()
 
-    global _silent
-    _silent = args.silent
+    global _quiet
+    global _seed
+    _seed = args.seed or 0
+    _quiet = args.quiet or False
 
-    template = str(args.template[0])
+    template = str(args.template)
     content = fetchContent(template)
     generateData(content)
 
 
 if __name__ == '__main__':
+
     main()

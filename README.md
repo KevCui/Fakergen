@@ -19,6 +19,7 @@
 - Customizable extended functions
 - Support any file formats: JSON, YAML, XML...
 - CLI script, easy to be integrated into any CI process
+- Support seed value for generating same output data
 
 ## Dependency
 
@@ -29,14 +30,15 @@
 ## Usage
 
 ```
-usage: fakergen.py [-h] [-s] template
+usage: fakergen.py [-h] [-q] [-s SEED] template
 
 positional arguments:
-  template      Faker template file
+  template              Faker template file
 
 optional arguments:
-  -h, --help    show this help message and exit
-  -s, --silent  Don't show error message
+  -h, --help            show this help message and exit
+  -q, --quiet           Be quiet, no error message
+  -s SEED, --seed SEED  Seed value
 ```
 
 - Generate JSON data using default `./template.json`:
