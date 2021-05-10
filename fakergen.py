@@ -1,6 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys
 import re
 import argparse
 
@@ -8,7 +7,7 @@ import argparse
 def printError(message):
     if not _quiet:
         print('\033[91m[ERROR]\033[0m ' + str(message))
-        sys.exit(1)
+        exit(1)
 
 
 def parseArgs():

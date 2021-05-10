@@ -24,7 +24,7 @@
 ## Dependency
 
 ```bash
-~$ pip install Faker
+$ pip install Faker
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ optional arguments:
 - Generate JSON data using default `./template.json`:
 
 ```bash
-~$ cat ./template.json
+$ cat ./template.json
 [
   {
     "product_number": "{{bothify(text='????-########', letters='ABCDE')}}",
@@ -61,7 +61,7 @@ optional arguments:
   }
 ]
 
-~$ ./fakergen.py template.json
+$ ./fakergen.py template.json
 [
   {
     "product_number": "CEAD-00367795",
